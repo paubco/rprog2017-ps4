@@ -7,16 +7,22 @@ bitcoin.trend <- gtrends(c("bitcoin"), gprop = "web", time = "all")[[1]]
 class(bitcoin.trend)
 head(bitcoin.trend)
 
+#creating a data table based on the data on google trends
+
 class(bitcoin.trend$date)
 
+#this actually tells us what cass date is
+
 ggplot(data = bitcoin.trend) + geom_line(mapping = aes(x= date, y = hits))
-?gtrends
+
+#plotting the bitcoin trend on tme
 
 bitcoin.trend <- bitcoin.trend %>% filter(date >= as.Date("2009-01-01"))
 ggplot(data = bitcoin.trend) + 
   geom_line(mapping = aes(x= date, y = hits)) +
   geom_vline(xintercept = as.Date("2017-01-20"), color = "red") #trump inauguration
   
+#this is plotting a line to indicate the break point from trump's election
 
 library(Quandl)
 bitcoin.price <- Quandl("BCHARTS/BITSTAMPUSD")
